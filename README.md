@@ -49,7 +49,9 @@ The project uses **mock data stored in localStorage** and **simulates role-based
 - **CSS3 & Bootstrap 5** – Styling & responsive design  
 - **JavaScript** – Interactivity, state management, and role simulation  
 - **Chart.js** – Line and doughnut charts for data visualization  
-- **Bootstrap Icons** – UI icons for navigation and actions  
+- **Bootstrap Icons** – UI icons for navigation and actions
+
+  ![Dashboard Screenshot](https://user-images.githubusercontent.com/SWaRANgi8728/dashboard.png)
 
 ## How to Run
 1. **Clone the repository**:
