@@ -56,3 +56,5 @@ The project uses **mock data stored in localStorage** and **simulates role-based
 1. **Clone the repository**:
 
    git clone https://github.com/SWaRANgi8728/finance_dashboard_ui.git
+
+   ![Dashboard Screenshot](https://raw.githubusercontent.com/SWaRANgi8728/Finance_Dashboard_UI/main/dashboard.png)
