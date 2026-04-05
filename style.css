@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --primary: #6366f1;
+  --text: #111827;
+  --subtext: #6b7280;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background: #111827;
+  min-height: 100vh;
+  padding-top: 20px;
+}
+
+.sidebar h4 {
+  font-weight: 600;
+}
+
+.sidebar .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #9ca3af;
+  padding: 10px;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background: #1f2937;
+  color: #fff;
+}
+
+.icon-circle {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #1f2937;
+  color: #9ca3af;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.sidebar .nav-link:hover .icon-circle,
+.sidebar .nav-link.active .icon-circle {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Topbar */
+.topbar {
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Cards */
+.card {
+  border-radius: 14px;
+  border: none;
+  background: var(--card);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+  transition: 0.25s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* Gradient Cards */
+.card-balance { background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; }
+.card-income { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; }
+.card-expense { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
+
+.card p { font-size: 13px; text-transform: uppercase; opacity: 0.9; }
+.card h3 { margin-top: 10px; font-weight: 600; }
+
+/* Table */
+.table { border-collapse: separate; border-spacing: 0 8px; }
+.table thead { color: var(--subtext); font-size: 13px; }
+.table tbody tr { background: white; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); transition: 0.2s; }
+.table tbody tr:hover { background: #f9fafb; }
+.table td { padding: 12px; }
+
+/* Inputs */
+.form-control, .form-select { border-radius: 10px; border: 1px solid #e5e7eb; }
+.form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(99,102,241,0.2); }
+
+/* Buttons */
+.btn-primary { background: var(--primary); border: none; border-radius: 10px; }
+.btn-primary:hover { opacity: 0.9; }
+
+/* Insights Cards */
+.insight-card { border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s; }
+.insight-card:hover { transform: translateY(-3px); }
+.insight-card small { font-size: 12px; opacity: 0.9; }
+.insight-card h6 { margin: 0; font-weight: 600; }
+
+/* Responsive */
+@media(max-width: 768px) {
+  .sidebar { display: none; }
+  .main-content { width: 100%; }
+  .card:hover { transform: none; }
+  .table tbody tr:hover { transform: none; }
+}
+
+/* Make all insight cards same height */
+@media(min-width: 768px) {
+  #insightsSection .insight-card {
+    height: 150px; /* set a fixed height for desktop */
+  }
+}
+  /* Mobile: full width, auto height */
+@media(max-width: 767px) {
+  #insightsSection .insight-card {
+    height: 150px;
+  }
+}
+
+/* Insight Cards Hover Effects */
+.insight-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.insight-card i {
+  transition: transform 0.4s ease, color 0.4s ease;
+}
+
+/* Primary (Blue) */
+.insight-card.bg-primary:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(99,102,241,0.6), 0 0 20px rgba(99,102,241,0.4);
+}
+.insight-card.bg-primary:hover i {
+  transform: scale(1.3) rotate(10deg);
+  color: #fff;
+}
+
+/* Success (Green) */
+.insight-card.bg-success:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(34,197,94,0.6), 0 0 20px rgba(34,197,94,0.4);
+}
+.insight-card.bg-success:hover i {
+  transform: scale(1.3) rotate(10deg);
+  color: #fff;
+}
+
+/* Warning (Orange/Yellow) */
+.insight-card.bg-warning:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(251,191,36,0.6), 0 0 20px rgba(251,191,36,0.4);
+}
+.insight-card.bg-warning:hover i {
+  transform: scale(1.3) rotate(10deg);
+  color: #fff;
+}
+
+/* Danger (Red) */
+.insight-card.bg-danger:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(239,68,68,0.6), 0 0 20px rgba(239,68,68,0.4);
+}
+.insight-card.bg-danger:hover i {
+  transform: scale(1.3) rotate(10deg);
+  color: #fff;
+}
+
+.insight-card small {
+  font-size: 15px; /* adjust as needed */
+  opacity: 0.9;    /* keeps the slightly muted look */
+  font-weight: 500; 
+}
+
+img.rounded-circle:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+  cursor: pointer;
+}

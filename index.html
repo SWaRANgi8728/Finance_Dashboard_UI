@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Finance Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="d-flex flex-column flex-md-row">
+
+  <!-- Sidebar -->
+  <div class="sidebar p-3">
+    <h4 class="text-white">FinDash</h4>
+    <ul class="nav flex-column mt-4">
+      <li class="nav-item mb-2"><a class="nav-link active" href="#" onclick="showSection('dashboard', event)">  
+        <span class="icon-circle"><i class="bi bi-speedometer2"></i></span>Dashboard</a></li>
+      <li class="nav-item mb-2"><a class="nav-link" href="#" onclick="showSection('transactions', event)"> 
+        <span class="icon-circle"><i class="bi bi-arrow-left-right"></i></span>Transactions</a></li>
+      <li class="nav-item mb-2"><a class="nav-link" href="#" onclick="showSection('insights', event)"> 
+        <span class="icon-circle"><i class="bi bi-lightbulb"></i></span>Insights</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content flex-grow-1">
+
+    <!-- Topbar -->
+    <div class="topbar d-flex justify-content-between align-items-center px-4 py-3 shadow-sm">
+      <h5 class="fw-semibold">Dashboard</h5>
+
+      <div class="d-flex gap-3 align-items-center">
+        <select id="roleSelect" class="form-select">
+          <option value="viewer">Viewer</option>
+          <option value="admin">Admin</option>
+        </select>
+        
+        <img src="profile.png" 
+     alt="Anime Profile" 
+     class="rounded-circle" 
+     style="width:40px; height:40px; object-fit:cover;">
+      </div>
+    </div>
+
+    <div class="container p-3 p-md-4">
+
+     <!-- Dashboard Section -->
+     <div id="dashboardSection">
+      <!-- Summary Cards -->
+      <div class="row g-4">
+        <div class="col-md-4 col-12">
+          <div class="card p-4 card-balance">
+            <p>💰 Total Balance</p>
+            <h3 id="balance">₹0</h3>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <div class="card p-4 card-income">
+            <p>💸 Income</p>
+            <h3 id="income">₹0</h3>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <div class="card p-4 card-expense">
+            <p>📉 Expenses</p>
+            <h3 id="expense">₹0</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="row mt-4 g-4">
+        <div class="col-lg-8 col-12">
+          <div class="card p-4">
+            <h6 class="fw-semibold mb-3">Financial Trend</h6>
+            <canvas id="lineChart"></canvas>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-12">
+          <div class="card p-4">
+            <h6 class="fw-semibold mb-3">Spending Breakdown</h6>
+            <canvas id="pieChart"></canvas>
+          </div>
+        </div>
+      </div>
+     </div>
+
+      <!-- Transactions Section -->
+      <div id="transactionsSection" class="card mt-4 p-4">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="fw-semibold">Transactions</h5>
+          <button id="addBtn" class="btn btn-primary btn-sm">Add</button>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-md-6 col-12 mb-2">
+            <input id="search" class="form-control" placeholder="Search category...">
+          </div>
+        </div>
+
+        <div class="table-responsive mt-3">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="table"></tbody>
+          </table>
+        </div>
+      </div>
+
+     
+     <!-- Insights Section -->
+    
+<div id="insightsSection" class="mt-4">
+  <h5 class="fw-semibold mb-3">Insights</h5>
+
+  <div class="row g-3">
+
+    <!-- Row 1: 3 cards -->
+    <div class="col-md-4 col-12">
+      <div class="card insight-card bg-primary text-white d-flex flex-column align-items-center justify-content-center text-center py-4">
+        <i class="bi bi-piggy-bank fs-3 mb-2"></i>
+        <small>Highest Spending</small>
+        <h6 id="insightHighest" class="mt-1">-</h6>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-12">
+      <div class="card insight-card bg-success text-white d-flex flex-column align-items-center justify-content-center text-center py-4">
+        <i class="bi bi-graph-up fs-3 mb-2"></i>
+        <small>Monthly Comparison</small>
+        <h6 id="insightMonthly" class="mt-1">-</h6>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-12">
+      <div class="card insight-card bg-warning text-white d-flex flex-column align-items-center justify-content-center text-center py-4">
+        <i class="bi bi-bar-chart fs-3 mb-2"></i>
+        <small>Top Categories</small>
+        <h6 id="insightTopCategories" class="mt-1">-</h6>
+      </div>
+    </div>
+
+    <!-- Row 2: 1 card aligned left -->
+    <div class="col-md-4 col-12">
+      <div class="card insight-card bg-danger text-white d-flex flex-column align-items-center justify-content-center text-center py-4">
+        <i class="bi bi-receipt fs-3 mb-2"></i>
+        <small>Total Transactions</small>
+        <h6 id="insightTotal" class="mt-1">-</h6>
+      </div>
+    </div>
+
+  </div>
+</div>
+  
+
+    </div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
